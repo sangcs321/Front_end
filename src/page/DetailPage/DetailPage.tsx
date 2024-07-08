@@ -1,13 +1,22 @@
-import React, {useState} from "react";
-import {Link, useLoaderData} from "react-router-dom";
-import {DetailFeed} from "../service/detailService";
-import {Col, List, Row} from "antd";
-import {RSSFeed} from "../service/rssService";
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
+import cheerio from 'cheerio';
+import "./style.css"
+import {useLoaderData} from "react-router";
+import {Col, Row} from "antd";
+import Caption from "../../component/Caption/Caption";
+import {RSSFeed} from "../../service/rssService";
+import {NewsItem} from "../../component/NewsItem";
+import Item from '../../component/Item';
+import {DetailFeed} from "../../service/detailService";
 import {useSelector} from "react-redux";
-import Item = List.Item;
-
+import {Link} from "react-router-dom";
 
 export async function loadUrl({params}: any) {
+    const url = params.url;
+    const articleContent = await DetailFeed(params.url);
+    const data = [url, articleContent]
+    return data;
 }
 const DetailPage = () => {
     const parser = new DOMParser();
@@ -17,7 +26,56 @@ const DetailPage = () => {
     const cate = useSelector((state: any) => state.cate)
     const[cateName, setCateName] = useState('');
     const[cateItem, setCateItem] = useState([]);
-
+    useEffect(() => {
+        let foundCategoryName = '';
+        let foundItem = [];
+        for (let category of cate.cates) {
+            for (let item of category.items) {
+                if (item.link === url) {
+                    foundCategoryName = category.name;
+                    foundItem = category.items;
+                    break;
+                }
+            }
+            if (foundCategoryName) break;
+        }
+        if (foundCategoryName && foundItem) {
+            setCateName(foundCategoryName);
+            setCateItem(foundItem)
+        }
+    }, [cate, url]);
+    console.log("cateName", cateName)
+    console.log("cateItem", cateItem)
+    const[newFeed, setNewFeed] = useState([])
+    useEffect(() => {
+        async function setFeed () {
+            setNewFeed(await RSSFeed("https://dantri.com.vn/rss/su-kien.rss"));
+        }
+        setFeed();
+    }, []);
+    let toUrl = "/category";
+    switch (cateName) {
+        case "Kinh doanh":
+            toUrl += "/kinh-doanh";
+            break;
+        case "Xã hội":
+            toUrl = "/xa-hoi";
+            break;
+        case "Thế giới":
+            toUrl = "/the-gioi";
+            break;
+        case "Giải trí":
+            toUrl = "/giai-tri";
+            break;
+        case "Bất động sản":
+            toUrl = "/bat-dong-san";
+            break;
+        case "Thể thao":
+            toUrl = "/the-thao";
+            break;
+        default:
+            return url;
+    }
     return (
         <div style={{backgroundColor: '#f2f2f2', padding: '20px 0'}}>
             <div style = {{maxWidth: 1200, margin: "auto", padding: "0 0 20px 15px"}}>
@@ -33,7 +91,7 @@ const DetailPage = () => {
                     <Col lg={7} md ={0} sm = {0} xs = {0} style={{paddingTop: 15, paddingLeft: 10}}>
                         <Row>
                             <Col span = {24}>
-                                <Caption title ="Tin liên quan" link={"category/bong-da-viet-nam"}/>
+                                <Caption title ="Tin liên quan" link={"category/kinh-doanh"}/>
                                 {cateItem.slice(0,4).map((item:any, index:any) => {
                                     let imageUrl: any = "";
                                     const doc = parser.parseFromString(item.content, 'text/html');
@@ -73,6 +131,5 @@ const DetailPage = () => {
             </div>
         </div>
     );
-
-}
+};
 export default DetailPage;
