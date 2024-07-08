@@ -38,7 +38,7 @@ function Menu() {
         }
     }, [bongDaVN, bongDaQT, chuyenNhuong, nhanDinh, theThao, esports, dispatch]);
     return (
-        <div style={{background:"white", }}>
+        <div style={{background:"blue", }}>
             <WrapperUl>
                 <li>
                     <WrapperLink to ={"/"}>TRANG CHỦ</WrapperLink>

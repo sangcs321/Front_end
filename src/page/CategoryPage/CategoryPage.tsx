@@ -1,10 +1,10 @@
 import {WrapperCateName, WrapperContain} from "./Style";
 import {Col, Row} from "antd";
-import Caption from "../../component/Caption/Caption";
+import Caption from "../../components/Caption/Caption";
 import {RSSFeed} from "../../service/rssService";
 import {useLoaderData} from "react-router";
-import Item from "../../component/Item";
-import {NewsItem} from "../../component/NewsItem";
+import Item from "../../components/Item";
+import {NewsItem} from "../../components/NewsItem";
 import {useEffect, useState} from "react";
 
 export async function loadRss({params}: any) {
