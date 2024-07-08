@@ -4,10 +4,10 @@ import cheerio from 'cheerio';
 import "./style.css"
 import {useLoaderData} from "react-router";
 import {Col, Row} from "antd";
-import Caption from "../../component/Caption/Caption";
+import Caption from "../../components/Caption/Caption";
 import {RSSFeed} from "../../service/rssService";
-import {NewsItem} from "../../component/NewsItem";
-import Item from '../../component/Item';
+import {NewsItem} from "../../components/NewsItem";
+import Item from '../../components/Item';
 import {DetailFeed} from "../../service/detailService";
 import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
