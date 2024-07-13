@@ -4,9 +4,10 @@ import {Link} from "react-router-dom";
 export const WrapperUl = styled.ul`
     list-style: none;
     display: flex;
-    gap: 15px;
+    gap: 10px;
     color: white;
     font-size: 12px;
+    border-bottom: 4px solid  #0E6830;
     height: 40px;
     align-items: center;
     font-weight: 400;
@@ -18,15 +19,17 @@ export const WrapperUl = styled.ul`
 export const WrapperLink = styled(Link)`
     text-decoration: none;
     padding: 0 5.5px;
+    margin-bottom: 10px;
     line-height: 40px;
     height: 40px;
     display: block;
-    color: #fff;
+    color: #0E6830;
+    border-left: 1px solid  #0E6830;
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 400;
     &:hover {
-        color: #3297fd;
+        color: red;
         cursor: pointer;
         transition: 0.4s;
     }
