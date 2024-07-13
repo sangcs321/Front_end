@@ -36,7 +36,7 @@ function Menu() {
                 { name: "Thế giới", items: theGioi },
                 { name: "Giải trí", items: giaiTri },
                 { name: "Bất động sản", items: batDongSan },
-                { name: "Esport", items: theThao },
+                { name: "Thể thao", items: theThao },
             ]));
         }
     }, [trangChu,kinhDoanh, xaHoi, theGioi, giaiTri, batDongSan, theThao, dispatch]);
