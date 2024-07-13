@@ -37,26 +37,21 @@ app.get('/scrape', async (req, res) => {
 
                 const data = [];
                 // Lấy tiêu đề
-                const title = $('.big_title').text();
+                const title = $('.title-page').text();
                 // Chọn nội dung có class 'txt_content'
-                const txtContent = $('.txt_content');
+                const txtContent = $('.singular-content');
 
                 // Xóa các phần tử có class 'ad-label'
-                $('.ad-label').remove();
+                // $('.ad-label').remove();
 
                 // Xóa các thẻ <p> có class 'expNoEdit'
-                txtContent.find('p.expNoEdit').remove();
+                // txtContent.find('p.expNoEdit').remove();
 
                 // Tìm tất cả các thẻ <figure> trong txt_content
                 txtContent.find('figure').each((index, figure) => {
                         // Tìm thẻ <a> trong thẻ <figure>
-                        const anchor = $(figure).find('a');  // Đã thay đổi $("figure").find('a') thành $(figure).find('a')
-                        if (anchor.length > 0) {
-                                // Lấy thuộc tính href của thẻ <a>
-                                const href = anchor.attr('href');
-                                // Tìm thẻ <img> trong thẻ <a> và đặt src của nó thành giá trị href
-                                anchor.find('img').attr('src', href);
-                        }
+                       $(figure).find('img').attr('src');  // Đã thay đổi $("figure").find('a') thành $(figure).find('a')
+
                 });
 
                 // Chỉ chọn các thẻ <p> và <figure> trong txt_content

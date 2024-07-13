@@ -1,31 +1,30 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
-import cheerio from 'cheerio';
-import "./style.css"
-import {useLoaderData} from "react-router";
-import {Col, Row} from "antd";
-import Caption from "../../components/Caption/Caption";
-import {RSSFeed} from "../../service/rssService";
-import {NewsItem} from "../../components/NewsItem";
+import React, { useEffect, useState } from 'react';
+import { useLoaderData } from 'react-router';
+import { Col, Row } from 'antd';
+import Caption from '../../components/Caption/Caption';
+import { RSSFeed } from '../../service/rssService';
 import Item from '../../components/Item';
-import {DetailFeed} from "../../service/detailService";
-import {useSelector} from "react-redux";
-import {Link} from "react-router-dom";
+import { DetailFeed } from '../../service/detailService';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-export async function loadUrl({params}: any) {
-    const url = params.url;
-    const articleContent = await DetailFeed(params.url);
-    const data = [url, articleContent]
+export async function loadUrl({ params }: any) {
+    const { category, articleSlug } = params;
+    const url = `/${category}/${articleSlug}`; // Cập nhật URL để bao gồm category và articleSlug
+    const articleContent = await DetailFeed(`https://dantri.com.vn${url}`); // Cập nhật URL để không thêm slash
+    const data = [url, articleContent];
     return data;
 }
+
 const DetailPage = () => {
     const parser = new DOMParser();
-    const data:any = useLoaderData()
-    const url = `https://dantri.com.vn/${data[0]}`
-    const articleContent: any = data[1]
-    const cate = useSelector((state: any) => state.cate)
-    const[cateName, setCateName] = useState('');
-    const[cateItem, setCateItem] = useState([]);
+    const data: any = useLoaderData();
+    const url = `https://dantri.com.vn${data[0]}`;
+    const articleContent: any = data[1];
+    const cate = useSelector((state: any) => state.cate);
+    const [cateName, setCateName] = useState('');
+    const [cateItem, setCateItem] = useState([]);
+
     useEffect(() => {
         let foundCategoryName = '';
         let foundItem = [];
@@ -41,18 +40,18 @@ const DetailPage = () => {
         }
         if (foundCategoryName && foundItem) {
             setCateName(foundCategoryName);
-            setCateItem(foundItem)
+            setCateItem(foundItem);
         }
     }, [cate, url]);
-    console.log("cateName", cateName)
-    console.log("cateItem", cateItem)
-    const[newFeed, setNewFeed] = useState([])
+
+    const [newFeed, setNewFeed] = useState([]);
     useEffect(() => {
-        async function setFeed () {
-            setNewFeed(await RSSFeed("https://dantri.com.vn/rss/su-kien.rss"));
+        async function setFeed() {
+            setNewFeed(await RSSFeed("https://dantri.com.vn/rss/home.rss"));
         }
         setFeed();
     }, []);
+
     let toUrl = "/category";
     switch (cateName) {
         case "Kinh doanh":
@@ -76,32 +75,34 @@ const DetailPage = () => {
         default:
             return url;
     }
+
     return (
-        <div style={{backgroundColor: '#f2f2f2', padding: '20px 0'}}>
-            <div style = {{maxWidth: 1200, margin: "auto", padding: "0 0 20px 15px"}}>
-                <Link style={{textDecoration: "none", color: "black", fontSize: 15}} to = "/">Trang chủ</Link>
-                <Link style={{textDecoration: "none", fontSize: 15}} to={toUrl}>{" > " + cateName}</Link>
+        <div style={{ backgroundColor: '#f2f2f2', padding: '20px 0' }}>
+            <div style={{ maxWidth: 1200, margin: "auto", padding: "0 0 20px 15px" }}>
+                <Link style={{ textDecoration: "none", color: "black", fontSize: 15 }} to="/">Trang chủ</Link>
+                <Link style={{ textDecoration: "none", fontSize: 15 }} to={toUrl}>{" > " + cateName}</Link>
             </div>
-            <div style={{maxWidth: 1200, margin: 'auto', textAlign: 'start', padding: '0px 15px',backgroundColor: 'white'}}>
+            <div style={{ maxWidth: 1200, margin: 'auto', textAlign: 'start', padding: '0px 15px', backgroundColor: 'white' }}>
                 <Row>
-                    <Col lg={17} md ={24}>
-                        <h1 className = "big_title">{articleContent[0]}</h1>
-                        <div  dangerouslySetInnerHTML={{ __html: articleContent[1] }} />
+                    <Col lg={17} md={24}>
+                        <h1 className="big_title">{articleContent[0]}</h1>
+                        {/* Đảm bảo nội dung HTML của bài viết được hiển thị đúng */}
+                        <div dangerouslySetInnerHTML={{ __html: articleContent[1] }} />
                     </Col>
-                    <Col lg={7} md ={0} sm = {0} xs = {0} style={{paddingTop: 15, paddingLeft: 10}}>
+                    <Col lg={7} md={0} sm={0} xs={0} style={{ paddingTop: 15, paddingLeft: 10 }}>
                         <Row>
-                            <Col span = {24}>
-                                <Caption title ="Tin liên quan" link={"category/kinh-doanh"}/>
-                                {cateItem.slice(0,4).map((item:any, index:any) => {
+                            <Col span={24}>
+                                <Caption title="Tin liên quan" link={`category/${cateName.toLowerCase()}`} />
+                                {cateItem.slice(0, 4).map((item: any, index: any) => {
                                     let imageUrl: any = "";
                                     const doc = parser.parseFromString(item.content, 'text/html');
                                     const imgElement = doc.querySelector('img');
                                     if (imgElement) {
                                         imageUrl = imgElement.getAttribute('src');
                                     }
-                                    return(
-                                        <div style={{marginBottom: "15px"}}>
-                                            <Item title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link} style={{width:"100%", height: "100%", }}  styleBody={{fontSize: "10px"}} col1={10} col2={14} />
+                                    return (
+                                        <div key={index} style={{ marginBottom: "15px" }}>
+                                            <Item title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link} style={{ width: "100%", height: "100%" }} styleBody={{ fontSize: "10px" }} col1={10} col2={14} />
                                         </div>
                                     );
                                 })}
@@ -110,8 +111,8 @@ const DetailPage = () => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col lg={18} >
-                        <Caption title ="Tin mới nhất"/>
+                    <Col lg={18}>
+                        <Caption title="Tin mới nhất" />
                         {newFeed.slice(1, 10).map((item: any, index: any) => {
                             let imageUrl: any = "";
                             const doc = parser.parseFromString(item.content, 'text/html');
@@ -120,16 +121,16 @@ const DetailPage = () => {
                                 imageUrl = imgElement.getAttribute('src');
                             }
                             return (
-                                <div key={index} style={{marginBottom: "15px"}}>
-                                    <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link} style={{width:"100%", height: "100%"}} styleBody={""} col1={6} col2={18} />
+                                <div key={index} style={{ marginBottom: "15px" }}>
+                                    <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link} style={{ width: "100%", height: "100%" }} styleBody={""} col1={6} col2={18} />
                                 </div>
                             );
-                        })
-                        }
+                        })}
                     </Col>
                 </Row>
             </div>
         </div>
     );
 };
+
 export default DetailPage;

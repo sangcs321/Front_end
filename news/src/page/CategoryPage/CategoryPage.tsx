@@ -108,14 +108,14 @@ function CategoryPage() {
                             imageUrl = imgElement.getAttribute('src');
                         }
                         return (
-                            <Col xl={6} lg={8} md={8} key={index} style={{margin: "0 auto"}}>
+                            <Col xl={6} lg={8} md={8}key={index} style={{margin: "0 auto"}}>
                                 {windowSize.width > 768 ? (
                                     <div style={{width: "90%", height: 300, margin: " 20px auto"}}>
-                                        <NewsItem title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link.replace("https://dantri.com.vn/", "")}/>
+                                        <NewsItem title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link}/>
                                     </div>
                                 ) : (
                                     <div style={{marginBottom: "15px"}}>
-                                        <Item title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link.replace("https://dantri.com.vn/", "")} style={{width:"100%", height: "100%"}} styleBody={""} col1={9} col2={15} />
+                                        <Item title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link} style={{width:"100%", height: "100%"}} styleBody={""} col1={9} col2={15} />
                                     </div>
                                 )
                                 }
@@ -132,47 +132,61 @@ function CategoryPage() {
                         return (
                             <Col xl={6} lg={8} md={8} key={index} style={{margin: "0 auto"}}>
                                 <div style={{  width: "90%", height: 350 , margin: " 20px auto"}}>
-                                    <NewsItem title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link.replace("https://dantri.com.vn/", "")}/>
+                                    <NewsItem title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link}/>
                                 </div>
                             </Col>
                         );
                     })
                 }
             </Row>
-            <Row>
-                <Col xl={6} lg={8} md={8} style={{margin: "0 auto"}}>
-                    {feed.slice(4).map((item: any, index: any) => {
-                        let imageUrl: any = "";
-                        const doc = parser.parseFromString(item.content, 'text/html');
-                        const imgElement = doc.querySelector('img');
-                        if (imgElement) {
-                            imageUrl = imgElement.getAttribute('src');
-                        }
-                        return (
-                            <div key={index} style={{marginBottom: "15px"}}>
-                                <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link.replace("https://dantri.com.vn/", "")} style={{width:"100%", height: "100%"}} styleBody={""} col1={9} col2={15} />
-                            </div>
-                        );
-                    })}
-                </Col>
-            </Row>
             <Caption title="Mới nhất"/>
             <Row>
-                {feed.slice(5).map((item: any, index: any) => {
-                    let imageUrl: any = "";
-                    const doc = parser.parseFromString(item.content, 'text/html');
-                    const imgElement = doc.querySelector('img');
-                    if (imgElement) {
-                        imageUrl = imgElement.getAttribute('src');
-                    }
-                    return (
-                        <Col xl={6} lg={8} md={8} key={index} style={{margin: "0 auto"}}>
-                            <div style={{marginBottom: "15px"}}>
-                                <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link.replace("https://dantri.com.vn/", "")} style={{width:"100%", height: "100%"}} styleBody={""} col1={9} col2={15} />
-                            </div>
-                        </Col>
-                    );
-                })}
+                {
+                    isSmallScreen ? (
+                        feed.slice(4).map((item: any, index: any) => {
+                            let imageUrl: any = "";
+                            const doc = parser.parseFromString(item.content, 'text/html');
+                            const imgElement = doc.querySelector('img');
+                            if (imgElement) {
+                                imageUrl = imgElement.getAttribute('src');
+                            }
+                            return (
+                                <Col span={24} key={index} style={{margin: "7.5px auto", marginBottom: "15px"}}>
+                                    <div>
+                                        {windowSize.width > 768 ? (
+                                            <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link} style={{width:"100%", height: "100%"}} styleBody={""} col1={6} col2={18}/>
+                                        ): (
+                                            <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link} style={{width:"100%", height: "100%"}} styleBody={""} col1={9} col2={15}/>
+
+                                        )}
+                                    </div>
+                                </Col>
+                            );
+                        })
+                    ):(
+                        feed.slice(5).map((item: any, index: any) => {
+                            let imageUrl: any = "";
+                            const doc = parser.parseFromString(item.content, 'text/html');
+                            const imgElement = doc.querySelector('img');
+                            if (imgElement) {
+                                imageUrl = imgElement.getAttribute('src');
+                            }
+                            return (
+                                <Col span={24} key={index} style={{margin: "7.5px auto", marginBottom: "15px"}}>
+                                    <div>
+                                        {windowSize.width > 768 ? (
+                                            <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link} style={{width:"100%", height: "100%"}} styleBody={""} col1={6} col2={18}/>
+                                        ): (
+                                            <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link} style={{width:"100%", height: "100%"}} styleBody={""} col1={9} col2={15}/>
+
+                                        )}
+                                    </div>
+                                </Col>
+                            );
+                        })
+                    )
+
+                }
             </Row>
         </WrapperContain>
     );
