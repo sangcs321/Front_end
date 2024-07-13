@@ -11,6 +11,10 @@ export async function loadRss({params}: any) {
     let url = "";
     let cateName = "";
     switch (params.nameCate) {
+        case "trang-chu":
+            url = "https://dantri.com.vn/rss/home.rss";
+            cateName = "Trang chủ";
+            break;
         case "kinh-doanh":
             url = "https://dantri.com.vn/rss/kinh-doanh.rss";
             cateName = "Kinh doanh";

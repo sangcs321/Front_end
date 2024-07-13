@@ -40,7 +40,6 @@ app.get('/scrape', async (req, res) => {
                 const title = $('.title-page').text();
                 // Chọn nội dung có class 'txt_content'
                 const txtContent = $('.singular-content');
-
                 // Xóa các phần tử có class 'ad-label'
                 // $('.ad-label').remove();
 

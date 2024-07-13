@@ -24,7 +24,6 @@ const DetailPage = () => {
     const cate = useSelector((state: any) => state.cate);
     const [cateName, setCateName] = useState('');
     const [cateItem, setCateItem] = useState([]);
-
     useEffect(() => {
         let foundCategoryName = '';
         let foundItem = [];
