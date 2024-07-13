@@ -20,7 +20,9 @@ export const router = createBrowserRouter([
             },
             {
                 index : true,
-                element : <HomePage/>
+                path: 'category/trang-chu',
+                element : <CategoryPage/>,
+                loader: loadRss,
             }
         ]
     }
