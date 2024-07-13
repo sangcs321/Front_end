@@ -21,7 +21,9 @@ export async function loadUrl({params}: any) {
 const DetailPage = () => {
     const parser = new DOMParser();
     const data:any = useLoaderData()
+
     const url = `https://dantri.com.vn/${data[0]}`
+    // const url = `http://localhost:3000/${data[0]}`
     const articleContent: any = data[1]
     const cate = useSelector((state: any) => state.cate)
     const[cateName, setCateName] = useState('');
@@ -49,7 +51,7 @@ const DetailPage = () => {
     const[newFeed, setNewFeed] = useState([])
     useEffect(() => {
         async function setFeed () {
-            setNewFeed(await RSSFeed("https://dantri.com.vn/rss/su-kien.rss"));
+            setNewFeed(await RSSFeed("https://dantri.com.vn/rss/home.rss"));
         }
         setFeed();
     }, []);

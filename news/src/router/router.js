@@ -14,16 +14,15 @@ export const router = createBrowserRouter([
                 loader: loadRss,
             },
             {
-                path: ':url',
+                path: ':/category:articleSlug',
                 element: <DetailPage/>,
                 loader: loadUrl,
             },
-            {
-                index : true,
-                path: 'category/trang-chu',
-                element : <CategoryPage/>,
-                loader: loadRss,
-            }
+            // {
+            //     path: 'category/:nameCate',
+            //     element : <CategoryPage/>,
+            //     loader: loadRss,
+            // }
         ]
     }
 ])

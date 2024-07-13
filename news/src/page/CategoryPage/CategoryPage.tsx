@@ -11,6 +11,10 @@ export async function loadRss({params}: any) {
     let url = "";
     let cateName = "";
     switch (params.nameCate) {
+        case "trang-chu":
+            url = "https://dantri.com.vn/rss/home.rss";
+            cateName = "Trang chủ";
+            break;
         case "kinh-doanh":
             url = "https://dantri.com.vn/rss/kinh-doanh.rss";
             cateName = "Kinh doanh";
@@ -87,11 +91,11 @@ function CategoryPage() {
                     <WrapperCateName>{nameCate}</WrapperCateName>
                     {windowSize.width > 768 ? (
                         <div>
-                             <Item title={feed[0].title} description={feed[0].contentSnippet} imageUrl={imageUrl} newsUrl={feed[0].link} style={{width:"100%", height: "100%"}} styleBody={{fontSize: "130%"}} col1={9} col2={15}/>
+                             <Item title={feed[0].title} description={feed[0].contentSnippet} imageUrl={imageUrl} newsUrl={feed[0].link.replace("https://dantri.com.vn/","")} style={{width:"100%", height: "100%"}} styleBody={{fontSize: "130%"}} col1={9} col2={15}/>
                         </div>
                     ) : (
                         <div style={{width: "90%", height: "auto", margin: " 20px auto"}}>
-                            <NewsItem title={feed[0].title} description={feed[0].contentSnippet} imageUrl={imageUrl} newsUrl={feed[0].link}/>
+                            <NewsItem title={feed[0].title} description={feed[0].contentSnippet} imageUrl={imageUrl} newsUrl={feed[0].link.replace("https://dantri.com.vn/","")}/>
                         </div>
                     )
                     }

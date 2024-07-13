@@ -37,9 +37,9 @@ app.get('/scrape', async (req, res) => {
 
                 const data = [];
                 // Lấy tiêu đề
-                const title = $('.big_title').text();
+                const title = $('.title_page').text();
                 // Chọn nội dung có class 'txt_content'
-                const txtContent = $('.txt_content');
+                const txtContent = $('.singular_content');
 
                 // Xóa các phần tử có class 'ad-label'
                 $('.ad-label').remove();
