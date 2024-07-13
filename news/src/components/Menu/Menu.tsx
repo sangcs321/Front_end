@@ -7,59 +7,62 @@ import {loadCate} from "../../store/cateReducer";
 
 function Menu() {
     const dispatch = useDispatch();
-    const [bongDaVN, setBongDaVn] = useState(null);
-    const [bongDaQT, setBongDaQT] = useState();
-    const [chuyenNhuong, setChuyenNhuong] = useState(null);
-    const [nhanDinh, setNhanDinh] = useState(null);
+    const [trangChu, setTrangChu] = useState(null);
+    const [kinhDoanh, setKinhDoanh] = useState(null);
+    const [xaHoi, setXaHoi] = useState();
+    const [theGioi, setTheGioi] = useState(null);
+    const [giaiTri, setGiaiTri] = useState(null);
+    const [batDongSan, setBatDongSan] = useState(null);
     const [theThao, setTheThao] = useState(null);
-    const [esports, setEsports] = useState(null);
 
     useEffect(() => {
         async function setFeed() {
-            setBongDaVn(await RSSFeed("https://thethao247.vn/bong-da-viet-nam-c1.rss"));
-            setBongDaQT(await RSSFeed("https://thethao247.vn/bong-da-quoc-te-c2.rss"));
-            setChuyenNhuong(await RSSFeed("https://thethao247.vn/tin-chuyen-nhuong-c14.rss"));
-            setNhanDinh(await RSSFeed("https://thethao247.vn/nhan-dinh-c165.rss"));
-            setTheThao(await RSSFeed("https://thethao247.vn/the-thao-tong-hop-c5.rss"));
-            setEsports(await RSSFeed("https://thethao247.vn/esports-c180.rss"));
+            setTrangChu(await RSSFeed("https://dantri.com.vn/rss/home.rss"));
+            setKinhDoanh(await RSSFeed("https://dantri.com.vn/rss/kinh-doanh.rss"));
+            setXaHoi(await RSSFeed("https://dantri.com.vn/rss/xa-hoi.rss"));
+            setTheGioi(await RSSFeed("https://dantri.com.vn/rss/the-gioi.rss"));
+            setGiaiTri(await RSSFeed("https://dantri.com.vn/rss/giai-tri.rss"));
+            setBatDongSan(await RSSFeed("https://dantri.com.vn/rss/bat-dong-san.rss"));
+            setTheThao(await RSSFeed("https://dantri.com.vn/rss/the-thao.rss"));
         }
         setFeed();
     }, []);
     useEffect(() => {
-        if (bongDaVN && bongDaQT && chuyenNhuong && nhanDinh && theThao && esports) {
+        if (trangChu && kinhDoanh && xaHoi && theGioi && giaiTri && batDongSan && theThao) {
             dispatch(loadCate([
-                { name: "Bóng đá Việt Nam", items: bongDaVN },
-                { name: "Bóng đá Quốc Tế", items: bongDaQT },
-                { name: "Thể thao", items: theThao },
-                { name: "Nhận định", items: nhanDinh },
-                { name: "Chuyển nhượng", items: chuyenNhuong },
-                { name: "Esport", items: esports },
+                { name: "Trang chủ", items: trangChu },
+                { name: "Kinh doanh", items: kinhDoanh },
+                { name: "Xã hội", items: xaHoi },
+                { name: "Thế giới", items: theGioi },
+                { name: "Giải trí", items: giaiTri },
+                { name: "Bất động sản", items: batDongSan },
+                { name: "Esport", items: theThao },
             ]));
         }
-    }, [bongDaVN, bongDaQT, chuyenNhuong, nhanDinh, theThao, esports, dispatch]);
+    }, [trangChu,kinhDoanh, xaHoi, theGioi, giaiTri, batDongSan, theThao, dispatch]);
     return (
-        <div style={{background:"blue", }}>
+        <div style={{background:"#254892", }}>
             <WrapperUl>
                 <li>
-                    <WrapperLink to ={"/"}>TRANG CHỦ</WrapperLink>
+                    <WrapperLink to ={"/category/trang-chu"}>TRANG CHỦ</WrapperLink>
                 </li>
                 <li>
-                    <WrapperLink to = {"/category/bong-da-viet-nam"}>BÓNG ĐÁ VIỆT NAM</WrapperLink>
+                    <WrapperLink to = {"/category/kinh-doanh"}>KINH DOANH</WrapperLink>
                 </li>
                 <li>
-                    <WrapperLink to = {"/category/bong-da-quoc-te"}>BÓNG ĐÁ QUỐC TẾ</WrapperLink>
+                    <WrapperLink to = {"/category/xa-hoi"}>XÃ HỘI</WrapperLink>
                 </li>
                 <li>
-                    <WrapperLink to = {"/category/tin-chuyen-nhuong"}>CHUYỂN NHƯỢNG</WrapperLink>
+                    <WrapperLink to = {"/category/the-gioi"}>THẾ GIỚI</WrapperLink>
                 </li>
                 <li>
-                    <WrapperLink to = {"/category/nhan-dinh"}>NHẬN ĐỊNH</WrapperLink>
+                    <WrapperLink to = {"/category/giai-tri"}>GIẢI TRÍ</WrapperLink>
                 </li>
                 <li>
-                    <WrapperLink to = {"/category/the-thao-tong-hop"}>THỂ THAO</WrapperLink>
+                    <WrapperLink to = {"/category/bat-dong-san"}>BẤT ĐỘNG SẢN</WrapperLink>
                 </li>
                 <li>
-                    <WrapperLink to ={"/category/esport"}>ESPORT</WrapperLink>
+                    <WrapperLink to ={"/category/the-thao"}>THỂ THAO</WrapperLink>
                 </li>
             </WrapperUl>
         </div>
