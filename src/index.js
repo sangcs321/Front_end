@@ -1,9 +1,8 @@
-// server.js
 import express from 'express';
 import Parser from 'rss-parser';
 import cors from 'cors';
-import axios from "axios";
-import cheerio from "cheerio";
+import axios from 'axios';
+import cheerio from 'cheerio';
 
 const app = express();
 const port = 4000;
@@ -24,6 +23,7 @@ app.get('/rss', async (req, res) => {
                 res.status(500).json({ error: error.message });
         }
 });
+
 app.get('/scrape', async (req, res) => {
         const ARTICLE_URL = req.query.url; // Lấy URL bài báo từ query parameter
         if (!ARTICLE_URL) {
@@ -40,17 +40,13 @@ app.get('/scrape', async (req, res) => {
                 const title = $('.title-page').text();
                 // Chọn nội dung có class 'txt_content'
                 const txtContent = $('.singular-content');
-                // Xóa các phần tử có class 'ad-label'
-                // $('.ad-label').remove();
 
-                // Xóa các thẻ <p> có class 'expNoEdit'
-                // txtContent.find('p.expNoEdit').remove();
-
-                // Tìm tất cả các thẻ <figure> trong txt_content
-                txtContent.find('figure').each((index, figure) => {
-                        // Tìm thẻ <a> trong thẻ <figure>
-                       $(figure).find('img').attr('src');  // Đã thay đổi $("figure").find('a') thành $(figure).find('a')
-
+                // Tìm tất cả các thẻ <figure> trong txt_content và đảm bảo hình ảnh có đầy đủ URL
+                txtContent.find('figure img').each((index, img) => {
+                        const imgSrc = $(img).attr('data-original') || $(img).attr('data-srcset');
+                        if (imgSrc) {
+                                $(img).attr('src', imgSrc.split(' ')[0]); // Chọn URL đầu tiên trong srcset
+                        }
                 });
 
                 // Chỉ chọn các thẻ <p> và <figure> trong txt_content
@@ -63,12 +59,14 @@ app.get('/scrape', async (req, res) => {
                 elements.each((index, element) => {
                         content += $.html(element);
                 });
-                data.push(title, content)
+
+                data.push(title, content);
                 res.json(data);
         } catch (error) {
                 res.status(500).json({ error: error.message });
         }
 });
+
 app.listen(port, () => {
         console.log(`Server is running on http://localhost:${port}`);
 });
