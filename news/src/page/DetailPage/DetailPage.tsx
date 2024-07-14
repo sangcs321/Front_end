@@ -53,6 +53,9 @@ const DetailPage = () => {
 
     let toUrl = "/category";
     switch (cateName) {
+        case "Trang chủ":
+            toUrl += "/trang-chu";
+            break;
         case "Kinh doanh":
             toUrl += "/kinh-doanh";
             break;
