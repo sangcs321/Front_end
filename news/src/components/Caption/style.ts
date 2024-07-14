@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 
 export const WrapperCaption = styled.div`
-    border-bottom: 1px solid #254892;
+    border-bottom: 1px solid #0E6830;
     height: 22px;
     margin-bottom: 15px;
     overflow: hidden;
@@ -15,7 +15,7 @@ export const WrapperCaption = styled.div`
 `
 export const WrapperLink = styled(Link) `
     padding: 0 10px;
-    background-color: #0f408b;
+    background-color: #0E6830;
     position: relative;
     &:before {
         content: "";
@@ -27,7 +27,6 @@ export const WrapperLink = styled(Link) `
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         height: 26px;
-        background: url(https://cdn-img.thethao247.vn/frontend/images/bg-min.svg?v=1) left -839px no-repeat;
     }
     &:hover {
         cursor: pointer;

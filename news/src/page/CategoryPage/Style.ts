@@ -22,7 +22,7 @@ export const WrapperContain = styled.div`
     }
 `;
 export const WrapperCateName = styled.h1 `
-    color: #254892;
+    color: #0E6830;
     font-size: 30px;
     font-weight: 400;
     display: block;

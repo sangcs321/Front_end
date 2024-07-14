@@ -78,8 +78,8 @@ const DetailPage = () => {
     return (
         <div style={{ backgroundColor: '#f2f2f2', padding: '20px 0' }}>
             <div style={{ maxWidth: 1200, margin: "auto", padding: "0 0 20px 15px" }}>
-                <Link style={{ textDecoration: "none", color: "black", fontSize: 15 }} to="/">Trang chủ</Link>
-                <Link style={{ textDecoration: "none", fontSize: 15 }} to={toUrl}>{" > " + cateName}</Link>
+                <Link style={{ textDecoration: "none", color: "black", fontSize: 30 }} to="/">Trang chủ</Link>
+                <Link style={{ textDecoration: "none", fontSize: 25 ,color:"#0E6830"}} to={toUrl}>{" > " + cateName}</Link>
             </div>
             <div style={{ maxWidth: 1200, margin: 'auto', textAlign: 'start', padding: '0px 15px', backgroundColor: 'white' }}>
                 <Row>

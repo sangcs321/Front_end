@@ -36,12 +36,12 @@ function Menu() {
                 { name: "Thế giới", items: theGioi },
                 { name: "Giải trí", items: giaiTri },
                 { name: "Bất động sản", items: batDongSan },
-                { name: "Esport", items: theThao },
+                { name: "Thể thao", items: theThao },
             ]));
         }
     }, [trangChu,kinhDoanh, xaHoi, theGioi, giaiTri, batDongSan, theThao, dispatch]);
     return (
-        <div style={{background:"#254892", }}>
+        <div style={{background:"#fff", }}>
             <WrapperUl>
                 <li>
                     <WrapperLink to ={"/category/trang-chu"}>TRANG CHỦ</WrapperLink>
