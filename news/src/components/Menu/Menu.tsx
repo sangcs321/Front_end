@@ -41,7 +41,7 @@ function Menu() {
         }
     }, [trangChu,kinhDoanh, xaHoi, theGioi, giaiTri, batDongSan, theThao, dispatch]);
     return (
-        <div style={{background:"#254892", }}>
+        <div style={{background:"#fff", }}>
             <WrapperUl>
                 <li>
                     <WrapperLink to ={"/category/trang-chu"}>TRANG CHỦ</WrapperLink>

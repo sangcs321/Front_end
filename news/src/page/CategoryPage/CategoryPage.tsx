@@ -115,11 +115,11 @@ function CategoryPage() {
                             <Col xl={6} lg={8} md={8}key={index} style={{margin: "0 auto"}}>
                                 {windowSize.width > 768 ? (
                                     <div style={{width: "90%", height: 300, margin: " 20px auto"}}>
-                                        <NewsItem title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link}/>
+                                        <NewsItem title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link.replace("https://dantri.com.vn/", "")}/>
                                     </div>
                                 ) : (
                                     <div style={{marginBottom: "15px"}}>
-                                        <Item title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link} style={{width:"100%", height: "100%"}} styleBody={""} col1={9} col2={15} />
+                                        <Item title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link.replace("https://dantri.com.vn/", "")} style={{width:"100%", height: "100%"}} styleBody={""} col1={9} col2={15} />
                                     </div>
                                 )
                                 }
@@ -136,7 +136,7 @@ function CategoryPage() {
                         return (
                             <Col xl={6} lg={8} md={8} key={index} style={{margin: "0 auto"}}>
                                 <div style={{  width: "90%", height: 350 , margin: " 20px auto"}}>
-                                    <NewsItem title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link}/>
+                                    <NewsItem title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link.replace("https://dantri.com.vn/", "")}/>
                                 </div>
                             </Col>
                         );
@@ -158,9 +158,9 @@ function CategoryPage() {
                                 <Col span={24} key={index} style={{margin: "7.5px auto", marginBottom: "15px"}}>
                                     <div>
                                         {windowSize.width > 768 ? (
-                                            <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link} style={{width:"100%", height: "100%"}} styleBody={""} col1={6} col2={18}/>
+                                            <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link.replace("https://dantri.com.vn/", "")} style={{width:"100%", height: "100%"}} styleBody={""} col1={6} col2={18}/>
                                         ): (
-                                            <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link} style={{width:"100%", height: "100%"}} styleBody={""} col1={9} col2={15}/>
+                                            <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link.replace("https://dantri.com.vn/", "")} style={{width:"100%", height: "100%"}} styleBody={""} col1={9} col2={15}/>
 
                                         )}
                                     </div>
@@ -179,9 +179,9 @@ function CategoryPage() {
                                 <Col span={24} key={index} style={{margin: "7.5px auto", marginBottom: "15px"}}>
                                     <div>
                                         {windowSize.width > 768 ? (
-                                            <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link} style={{width:"100%", height: "100%"}} styleBody={""} col1={6} col2={18}/>
+                                            <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link.replace("https://dantri.com.vn/", "")} style={{width:"100%", height: "100%"}} styleBody={""} col1={6} col2={18}/>
                                         ): (
-                                            <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link} style={{width:"100%", height: "100%"}} styleBody={""} col1={9} col2={15}/>
+                                            <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link.replace("https://dantri.com.vn/", "")} style={{width:"100%", height: "100%"}} styleBody={""} col1={9} col2={15}/>
 
                                         )}
                                     </div>
