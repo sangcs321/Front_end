@@ -38,6 +38,10 @@ app.get('/scrape', async (req, res) => {
                 const data = [];
                 // Lấy tiêu đề
                 const title = $('.title-page').text();
+                // Lấy tên tác giả
+                const author = $('.author-name').text();
+                // Lấy thời gian đăng bài
+                const time = $('.author-time').text();
                 // Chọn nội dung có class 'txt_content'
                 const txtContent = $('.singular-content');
 
@@ -60,7 +64,7 @@ app.get('/scrape', async (req, res) => {
                         content += $.html(element);
                 });
 
-                data.push(title, content);
+                data.push(title,author,time, content);
                 res.json(data);
         } catch (error) {
                 res.status(500).json({ error: error.message });
