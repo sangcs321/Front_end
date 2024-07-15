@@ -106,7 +106,7 @@ const DetailPage = () => {
                                     }
                                     return (
                                         <div key={index} style={{ marginBottom: "15px" }}>
-                                            <Item title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link} style={{ width: "100%", height: "100%" }} styleBody={{ fontSize: "10px" }} col1={10} col2={14} />
+                                            <Item title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link.replace("https://dantri.com.vn/", "")} style={{ width: "100%", height: "100%" }} styleBody={{ fontSize: "10px" }} col1={10} col2={14} />
                                         </div>
                                     );
                                 })}
@@ -126,7 +126,7 @@ const DetailPage = () => {
                             }
                             return (
                                 <div key={index} style={{ marginBottom: "15px" }}>
-                                    <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link} style={{ width: "100%", height: "100%" }} styleBody={""} col1={6} col2={18} />
+                                    <Item title={item.title} description={item.contentSnippet} imageUrl={imageUrl} newsUrl={item.link.replace("https://dantri.com.vn/", "")} style={{ width: "100%", height: "100%" }} styleBody={""} col1={6} col2={18} />
                                 </div>
                             );
                         })}
