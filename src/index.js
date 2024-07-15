@@ -45,6 +45,8 @@ app.get('/scrape', async (req, res) => {
                 // Chọn nội dung có class 'txt_content'
                 const txtContent = $('.singular-content');
 
+
+                txtContent.find('.video').remove();
                 // Tìm tất cả các thẻ <figure> trong txt_content và đảm bảo hình ảnh có đầy đủ URL
                 txtContent.find('figure img').each((index, img) => {
                         const imgSrc = $(img).attr('data-original') || $(img).attr('data-srcset');

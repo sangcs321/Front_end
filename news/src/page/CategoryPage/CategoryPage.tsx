@@ -136,7 +136,7 @@ function CategoryPage() {
                         return (
                             <Col xl={6} lg={8} md={8} key={index} style={{margin: "0 auto"}}>
                                 <div style={{  width: "90%", height: 350 , margin: " 20px auto"}}>
-                                    <NewsItem title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link.replace("https://dantri.com.vn/", "")}/>
+                                    <NewsItem title={item.title} description={""} imageUrl={imageUrl} newsUrl={item.link.replace("https://dantri.com.vn/"+nameCate, "")}/>
                                 </div>
                             </Col>
                         );
