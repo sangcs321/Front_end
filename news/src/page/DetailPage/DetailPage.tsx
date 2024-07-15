@@ -7,7 +7,7 @@ import Item from '../../components/Item';
 import { DetailFeed } from '../../service/detailService';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-
+import './style.css';
 export async function loadUrl({ params }: any) {
     const { category, articleSlug } = params;
     const url = `/${category}/${articleSlug}`; // Cập nhật URL để bao gồm category và articleSlug
@@ -88,8 +88,10 @@ const DetailPage = () => {
                 <Row>
                     <Col lg={17} md={24}>
                         <h1 className="big_title">{articleContent[0]}</h1>
+                        <h3 className="author_name">Tác giả: {articleContent[1]}</h3>
+                        <div className="date" style={{fontStyle:"italic"}}>{articleContent[2]}</div>
                         {/* Đảm bảo nội dung HTML của bài viết được hiển thị đúng */}
-                        <div dangerouslySetInnerHTML={{ __html: articleContent[1] }} />
+                        <div dangerouslySetInnerHTML={{ __html: articleContent[3] }} />
                     </Col>
                     <Col lg={7} md={0} sm={0} xs={0} style={{ paddingTop: 15, paddingLeft: 10 }}>
                         <Row>
